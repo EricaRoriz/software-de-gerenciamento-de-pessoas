@@ -1,0 +1,77 @@
+# Boas-vindas
+print('Bem-vindo ao Controle de Livros da Érica Marta Roriz - RU 4573966!')
+
+# Lista de livros
+lista_livros = []
+id_global = 0
+
+# Função para cadastrar um livro
+def cadastrar_livro(id):
+    global id_global
+    id_global += 1
+    nome = input('Digite o nome do livro: ')
+    autor = input('Digite o nome do autor: ')
+    editora = input('Digite o nome da editora: ')
+    livro = {'id': id, 'nome': nome, 'autor': autor, 'editora': editora}
+    lista_livros.append(livro)
+
+# Função para consultar livros
+def consultar_livro():
+    opcao = input('Qual opção deseja? (1. Consultar Todos / 2. Consultar por Id / 3. Consultar por Autor / 4. Retornar ao menu): ')
+    if opcao == '1':
+        if lista_livros:
+            for livro in lista_livros:
+                print(livro)
+        else:
+            print('Nenhum livro cadastrado.')
+    elif opcao == '2':
+        id_consulta = int(input('Digite o ID do livro: '))
+        for livro in lista_livros:
+            if livro['id'] == id_consulta:
+                print(livro)
+                break
+        else:
+            print('Livro não encontrado.')
+    elif opcao == '3':
+        autor_consulta = input('Digite o nome do autor: ')
+        for livro in lista_livros:
+            if livro['autor'] == autor_consulta:
+                print(livro)
+        else:
+            print('Nenhum livro encontrado para este autor.')
+    elif opcao == '4':
+        return
+    else:
+        print('Opção inválida.')
+
+# Função para remover livro
+def remover_livro():
+    id_remover = int(input('Digite o ID do livro a ser removido: '))
+    for livro in lista_livros:
+        if livro['id'] == id_remover:
+            lista_livros.remove(livro)
+            print('Livro removido com sucesso.')
+            return
+    else:
+        print('Livro não encontrado.')
+
+# Estrutura de menu
+while True:
+    print('\nMenu:')
+    print('1. Cadastrar Livro')
+    print('2. Consultar Livro')
+    print('3. Remover Livro')
+    print('4. Encerrar Programa')
+    opcao_menu = input('Escolha uma opção: ')
+
+    if opcao_menu == '1':
+        cadastrar_livro(id_global)
+    elif opcao_menu == '2':
+        consultar_livro()
+    elif opcao_menu == '3':
+        remover_livro()
+    elif opcao_menu == '4':
+        print('Encerrando o programa...')
+        break
+    else:
+        print('Opção inválida.')
